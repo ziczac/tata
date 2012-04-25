@@ -20,3 +20,8 @@ function TataValidator(formId)
 
   this.formobj.onsubmit = form_submit_handler;
 }
+
+TataValidator.prototype.addValidator = function()
+{
+
+}

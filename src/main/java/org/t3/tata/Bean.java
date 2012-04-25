@@ -18,7 +18,9 @@
  */
 package org.t3.tata;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,14 +71,11 @@ public class Bean implements Input<String>
       }
       map.put(validator, message);
    }
-
-   public void clientCheck(StringBuilder str)
+   
+   @Override
+   public List<Validator<String>> getValidators()
    {
-      for (Validator<String> validator : map.keySet())
-      {
-         str.append("form.addValidation(\"" + name + "\",\"" + validator.clientCheckRegExp() + "\",\""
-            + map.get(validator) + "\");");
-      }
+      return new ArrayList<Validator<String>>(map.keySet());
    }
 
    public boolean isValid()

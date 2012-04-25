@@ -16,23 +16,43 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.t3.tata;
+package org.t3.tata.client;
+
+import org.t3.tata.Input;
+import org.t3.tata.Validator;
+
+import java.util.List;
 
 /**
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
  */
-public class NotNullValidator extends AbstractValidator<String>
+public class DefaultFormValidator implements FormValidator
 {
-   @Override
-   public boolean validate(String value)
+   private StringBuilder str;
+
+   public DefaultFormValidator(String formName)
    {
-      return (value != null && !value.isEmpty());
+      str = new StringBuilder("var form  = new Validator(\"" + formName + "\");");
    }
 
    @Override
-   public String clientCheckRegExp()
+   public void addValidator(Input<Object> bean, List<Validator<Object>> validators)
    {
-      return "req";
+      for (Validator<Object> validator : validators)
+      {
+         str.append(generateJScript(bean.getName(), validator.clientCheckRegExp(), validator.errorMessage()));
+      }
+   }
+
+   private Object generateJScript(String name, String clientCheckRegExp, String errorMessage)
+   {
+      return "form.addValidation('" + name + "', '" + clientCheckRegExp + "', '" + errorMessage + "');";
+   }
+
+   @Override
+   public String toString()
+   {
+      return str.toString();
    }
 }

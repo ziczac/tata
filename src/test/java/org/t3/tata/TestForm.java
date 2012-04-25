@@ -18,15 +18,25 @@
  */
 package org.t3.tata;
 
+import junit.framework.TestCase;
+
 /**
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
  */
-public interface Validator<T>
+public class TestForm extends TestCase
 {
-   public boolean validate(T value);
-   
-   public String errorMessage();
+   public void testForm()
+   {
+      Form form = new Form("form");
+      Bean bean = new Bean("username", "bar");
+      bean.addValidator(new NotNullValidator(), "Empty is not allowed");
+      form.addInput(bean);
+      
+      bean = new Bean("email", "bar@foo.com");
+      bean.addValidator(new EmailValidator(), "Email is not correct");
+      form.addInput(bean);
 
-   public String clientCheckRegExp();
+      assertTrue(form.isValid());
+   }
 }

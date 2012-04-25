@@ -18,6 +18,8 @@
  */
 package org.t3.tata;
 
+import java.util.List;
+
 /**
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
@@ -30,5 +32,5 @@ public interface Input<T> extends FormElement
 
    public void addValidator(Validator<T> validator, String message);
    
-   public void clientCheck(StringBuilder str);
+   public List<Validator<T>> getValidators();
 }

@@ -22,7 +22,7 @@ package org.t3.tata;
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
  */
-public class MaxLengthValidator implements Validator<String>
+public class MaxLengthValidator extends AbstractValidator<String>
 {
    private int len;
 

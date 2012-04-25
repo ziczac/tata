@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
  */
-public class EmailValidator implements Validator<String>
+public class EmailValidator extends AbstractValidator<String>
 {
    private Pattern pattern;
 

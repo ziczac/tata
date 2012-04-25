@@ -16,17 +16,18 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.t3.tata;
+package org.t3.tata.client;
+
+import org.t3.tata.Input;
+import org.t3.tata.Validator;
+
+import java.util.List;
 
 /**
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
  */
-public interface Validator<T>
+public interface FormValidator
 {
-   public boolean validate(T value);
-   
-   public String errorMessage();
-
-   public String clientCheckRegExp();
+   void addValidator(Input<Object> bean, List<Validator<Object>> validators);
 }

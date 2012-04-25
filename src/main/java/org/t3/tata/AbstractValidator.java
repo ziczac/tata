@@ -22,11 +22,11 @@ package org.t3.tata;
  * @author <a href="trongtt@gmail.com">Trong Tran</a>
  * @version $Revision$
  */
-public interface Validator<T>
+public abstract class AbstractValidator<T> implements Validator<T>
 {
-   public boolean validate(T value);
-   
-   public String errorMessage();
-
-   public String clientCheckRegExp();
+   @Override
+   public String errorMessage()
+   {
+      return "Override me! The error message in " + this.getClass().getName();
+   }
 }

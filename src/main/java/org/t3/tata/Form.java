@@ -1,6 +1,9 @@
 package org.t3.tata;
 
+import org.t3.tata.client.DefaultFormValidator;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Form implements FormElement
 {
@@ -30,14 +33,15 @@ public class Form implements FormElement
 
    public String jScriptsForValidation()
    {
-      StringBuilder str = new StringBuilder("var form  = new FormValidator(\"" + name + "\");");
+      DefaultFormValidator formValidator = new DefaultFormValidator(name);
 
-      for (Input<?> bean : list)
+      for (Input bean : list)
       {
-         bean.clientCheck(str);
+         List<Validator<Object>> validators = bean.getValidators();
+         formValidator.addValidator(bean, validators);
       }
 
-      return str.toString();
+      return formValidator.toString();
    }
 
    @Override
